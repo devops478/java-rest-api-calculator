@@ -1,8 +1,11 @@
 pipeline {
-    agent master
+    agent none
 
     stages {
         stage('Build') {
+            agent {
+                label "master"
+            }
             tools {
               maven "MAVEN3.8.1"
             }
@@ -13,6 +16,9 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+                label "master"
+            }
             steps {
                 sh 'mvn test'
                 // bat '.\\mvnw test'
